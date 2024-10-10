@@ -81,3 +81,8 @@ MODIFY COLUMN EDITORA_id_editora int NOT NULL;
 
 ALTER TABLE estoque
 MODIFY COLUMN LIVRO_id_livro int NOT NULL;
+
+DESC cliente_endereco;
+
+ALTER TABLE cliente_endereco
+MODIFY COLUMN CLIENTE_id_cliente int NOT NULL;
