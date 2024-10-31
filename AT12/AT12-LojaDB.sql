@@ -83,11 +83,11 @@ ORDER BY quantidade DESC
 LIMIT 1;
 
 -- Exercício 8
-SELECT id_nf, cod_produto
+SELECT id_nf, cod_produto,
+COUNT(quantidade)
 FROM tb_vendas
 WHERE quantidade > 10
-GROUP BY id_nf, cod_produto
-ORDER BY id_nf, cod_produto;
+GROUP BY id_nf, cod_produto;
 
 -- Exercício 9
 SELECT id_nf,
