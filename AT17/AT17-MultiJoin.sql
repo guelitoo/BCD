@@ -255,15 +255,3 @@ FROM
 WHERE
     pr.data_pedido BETWEEN '2024-11-01' AND '2024-11-10';
 -- Exercício 10: Liste o nome completo dos clientes, o nome da roupa comprada, e a categoria principal da roupa. Mostre apenas os pedidos feitos por clientes cuja cor favorita está disponível na roupa comprada. 
-SELECT 
-    CONCAT(cl.primeiro_nome, ' ', cl.sobrenome) AS nome_completo,
-    r.nome AS roupa,
-    c1.nome AS categoria_principal
-FROM
-    tb_pedido_roupa pr
-        JOIN tb_cliente cl ON pr.CLIENTE_id_cliente = cl.id_cliente
-        JOIN tb_roupa r ON pr.ROUPA_id_roupa = r.id_roupa
-        JOIN tb_cor cr ON r.COR_id_cor = cr.id_cor
-        JOIN tb_categoria c2 ON r.CATEGORIA_id_categoria = c2.id_categoria
-        LEFT JOIN tb_categoria c1 ON c2.CATEGORIA_id_categoria_pai = c1.id_categoria
-WHERE cl.COR_id_cor_favorita = r.COR_id_cor;
