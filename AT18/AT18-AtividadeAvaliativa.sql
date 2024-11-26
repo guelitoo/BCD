@@ -286,18 +286,15 @@ GROUP BY
 
 -- 03) Determinar o corredor mais jovem que participou de pelo menos um evento e a data do evento mais recente que ele participou
 SELECT 
-    c.nome_corredor,
+    c.nome_corredor AS corredor_mais_jovem,
     MAX(e.dt_evento) AS data_evento_mais_recente
 FROM 
     tb_corredor c
 JOIN 
-    tb_corredor_evento ce
-ON 
-    c.id_corredor = ce.CORREDOR_id_corredor
+    tb_corredor_evento ce ON c.id_corredor = ce.CORREDOR_id_corredor
 JOIN 
-    tb_evento e
-ON 
-    ce.EVENTO_id_evento = e.id_evento
-ORDER BY 
-    c.dt_nasc DESC
-LIMIT 1;
+    tb_evento e ON ce.EVENTO_id_evento = e.id_evento
+WHERE 
+    c.dt_nasc = (SELECT MAX(dt_nasc) FROM tb_corredor)
+GROUP BY 
+    c.nome_corredor;
