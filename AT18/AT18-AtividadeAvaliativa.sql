@@ -312,4 +312,22 @@ JOIN
 GROUP BY 
     c.id_corredor;
 
+--33
+SELECT 
+    c.nome_corredor,
+    MAX(e.dt_evento) AS data_mais_recente
+FROM 
+    tb_corredor c
+JOIN 
+    tb_corredor_evento ce ON c.id_corredor = ce.CORREDOR_id_corredor
+JOIN 
+    tb_evento e ON ce.EVENTO_id_evento = e.id_evento
+WHERE 
+    c.dt_nasc = (SELECT MAX(dt_nasc) FROM tb_corredor WHERE id_corredor IN (
+        SELECT CORREDOR_id_corredor FROM tb_corredor_evento
+    ))
+GROUP BY 
+    c.id_corredor, c.nome_corredor;
+
+
 
